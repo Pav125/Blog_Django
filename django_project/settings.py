@@ -10,6 +10,7 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/5.0/ref/settings/
 """
 
+import os
 from pathlib import Path
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -20,7 +21,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/5.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-ub1dl5-bb%)g=+(oyq!u4s6qg=ssk+oqcpm!$lg!*21eizhxf^'
+SECRET_KEY = 'django-insecure-(haq-)(nqr^4ke=xg1qv(9^x%apbg67qy-)8ypn3%9g6h0t7(f'
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -31,6 +32,10 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
+    'users.apps.UsersConfig',
+    'blog.apps.BlogConfig',
+    'crispy_forms',
+    'crispy_bootstrap5',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -117,7 +122,21 @@ USE_TZ = True
 
 STATIC_URL = 'static/'
 
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media') #  Absolute filesystem path to the directory that will hold user-uploaded files. Example: "/home
+# using os.path.join() method we will sure that the correct path is save no matter what operating system you r in.
+#  BASE_DIR  is a variable that Django uses to help it find your project’s directory. It gets its value based on the location of manage.py .
+MEDIA_URL = '/media/' #  this is the url to access media files in our project 
+
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.0/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+
+CRISPY_ALLOWED_TEMPLATES_PACKS =  "bootstrap5" # used for form  layouts
+
+CRISPY_TEMPLATE_PACK = 'bootstrap5' # default in case of missing template pack
+
+LOGIN_REDIRECT_URL = 'blog-home'
+
+LOGIN_URL = 'login' #  Used for login redirection , it is provided so that  user can be redirected to the desired page after successful authentication (login).
